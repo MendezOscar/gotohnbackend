@@ -42,8 +42,6 @@ namespace gotohnbackend.Controllers
         }
 
         // PUT: api/Categoria/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCategoria(int id, Categoria categoria)
         {
@@ -74,8 +72,6 @@ namespace gotohnbackend.Controllers
         }
 
         // POST: api/Categoria
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         public async Task<ActionResult<Categoria>> PostCategoria(Categoria categoria)
         {

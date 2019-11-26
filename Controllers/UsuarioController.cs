@@ -42,8 +42,6 @@ namespace gotohnbackend.Controllers
         }
 
         // PUT: api/Usuario/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuario(int id, Usuario usuario)
         {
@@ -74,8 +72,6 @@ namespace gotohnbackend.Controllers
         }
 
         // POST: api/Usuario
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
         {

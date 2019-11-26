@@ -29,7 +29,6 @@ namespace gotohnbackend.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseNpgsql("User ID = postgres;Password=M3nd3z;Server=localhost;Port=5432;Database=gotoTrip;Integrated Security=true; Pooling=true;");
             }
         }

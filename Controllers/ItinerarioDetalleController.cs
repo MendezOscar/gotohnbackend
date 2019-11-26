@@ -42,8 +42,6 @@ namespace gotohnbackend.Controllers
         }
 
         // PUT: api/ItinerarioDetalle/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutItinerarioDetalle(int id, ItinerarioDetalle itinerarioDetalle)
         {
@@ -74,8 +72,6 @@ namespace gotohnbackend.Controllers
         }
 
         // POST: api/ItinerarioDetalle
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         public async Task<ActionResult<ItinerarioDetalle>> PostItinerarioDetalle(ItinerarioDetalle itinerarioDetalle)
         {
