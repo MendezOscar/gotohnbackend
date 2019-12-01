@@ -8,13 +8,15 @@ namespace gotohnbackend.Models
         public Lugar()
         {
             Actividades = new HashSet<Actividades>();
-            Preferencia = new HashSet<Preferencia>();
         }
 
         public int Lugarid { get; set; }
         public string Nombre { get; set; }
+        public string Lugar1 { get; set; }
+        public string Foto { get; set; }
+        public DateTime? Horaentrada { get; set; }
+        public DateTime? Horacierre { get; set; }
 
         public virtual ICollection<Actividades> Actividades { get; set; }
-        public virtual ICollection<Preferencia> Preferencia { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace gotohnbackend.Models
         public int Lugarid { get; set; }
         public int Categoriaid { get; set; }
         public int Jornadaid { get; set; }
+        public DateTime? Duracion { get; set; }
 
         public virtual Categoria Categoria { get; set; }
         public virtual Jornada Jornada { get; set; }

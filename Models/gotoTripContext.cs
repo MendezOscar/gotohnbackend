@@ -21,14 +21,13 @@ namespace gotohnbackend.Models
         public virtual DbSet<ItinerarioEncabezado> ItinerarioEncabezado { get; set; }
         public virtual DbSet<Jornada> Jornada { get; set; }
         public virtual DbSet<Lugar> Lugar { get; set; }
-        public virtual DbSet<Preferencia> Preferencia { get; set; }
-        public virtual DbSet<Seleccion> Seleccion { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseNpgsql("User ID = postgres;Password=M3nd3z;Server=localhost;Port=5432;Database=gotoTrip;Integrated Security=true; Pooling=true;");
             }
         }
@@ -52,6 +51,10 @@ namespace gotohnbackend.Models
                     .IsRequired()
                     .HasColumnName("description")
                     .HasColumnType("character varying");
+
+                entity.Property(e => e.Duracion)
+                    .HasColumnName("duracion")
+                    .HasColumnType("date");
 
                 entity.Property(e => e.Horario)
                     .HasColumnName("horario")
@@ -111,6 +114,8 @@ namespace gotohnbackend.Models
 
                 entity.Property(e => e.Itinierarioid).HasColumnName("itinierarioid");
 
+                entity.Property(e => e.Prioridad).HasColumnName("prioridad");
+
                 entity.HasOne(d => d.Actividad)
                     .WithMany(p => p.ItinerarioDetalle)
                     .HasForeignKey(d => d.Actividadid)
@@ -135,13 +140,17 @@ namespace gotohnbackend.Models
                     .HasColumnName("itinierarioid")
                     .UseIdentityAlwaysColumn();
 
-                entity.Property(e => e.Prefeenciaid).HasColumnName("prefeenciaid");
+                entity.Property(e => e.Fechafinal).HasColumnName("fechafinal");
 
-                entity.HasOne(d => d.Prefeencia)
-                    .WithMany(p => p.ItinerarioEncabezado)
-                    .HasForeignKey(d => d.Prefeenciaid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_prefeenciaid");
+                entity.Property(e => e.Fechainicio)
+                    .HasColumnName("fechainicio")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.Lugarid).HasColumnName("lugarid");
+
+                entity.Property(e => e.Nombre)
+                    .HasColumnName("nombre")
+                    .HasColumnType("character varying");
             });
 
             modelBuilder.Entity<Jornada>(entity =>
@@ -165,74 +174,25 @@ namespace gotohnbackend.Models
                     .HasColumnName("lugarid")
                     .UseIdentityAlwaysColumn();
 
+                entity.Property(e => e.Foto)
+                    .HasColumnName("foto")
+                    .HasColumnType("character varying");
+
+                entity.Property(e => e.Horacierre)
+                    .HasColumnName("horacierre")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.Horaentrada)
+                    .HasColumnName("horaentrada")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.Lugar1)
+                    .HasColumnName("lugar")
+                    .HasColumnType("character varying");
+
                 entity.Property(e => e.Nombre)
                     .HasColumnName("nombre")
                     .HasColumnType("character varying");
-            });
-
-            modelBuilder.Entity<Preferencia>(entity =>
-            {
-                entity.HasKey(e => e.Prefeenciaid)
-                    .HasName("preferencia_pkey");
-
-                entity.ToTable("preferencia");
-
-                entity.Property(e => e.Prefeenciaid)
-                    .HasColumnName("prefeenciaid")
-                    .UseIdentityAlwaysColumn();
-
-                entity.Property(e => e.Categoriaid).HasColumnName("categoriaid");
-
-                entity.Property(e => e.Jornadaid).HasColumnName("jornadaid");
-
-                entity.Property(e => e.Lugarid).HasColumnName("lugarid");
-
-                entity.Property(e => e.Usuarioid).HasColumnName("usuarioid");
-
-                entity.HasOne(d => d.Categoria)
-                    .WithMany(p => p.Preferencia)
-                    .HasForeignKey(d => d.Categoriaid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_categoriaid");
-
-                entity.HasOne(d => d.Jornada)
-                    .WithMany(p => p.Preferencia)
-                    .HasForeignKey(d => d.Jornadaid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_jornadaid");
-
-                entity.HasOne(d => d.Lugar)
-                    .WithMany(p => p.Preferencia)
-                    .HasForeignKey(d => d.Lugarid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_lugarid");
-
-                entity.HasOne(d => d.Usuario)
-                    .WithMany(p => p.Preferencia)
-                    .HasForeignKey(d => d.Usuarioid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_usuarioid");
-            });
-
-            modelBuilder.Entity<Seleccion>(entity =>
-            {
-                entity.ToTable("seleccion");
-
-                entity.Property(e => e.Seleccionid)
-                    .HasColumnName("seleccionid")
-                    .UseIdentityAlwaysColumn();
-
-                entity.Property(e => e.Actividadid).HasColumnName("actividadid");
-
-                entity.Property(e => e.Prefeenciaid).HasColumnName("prefeenciaid");
-
-                entity.Property(e => e.Prioridad).HasColumnName("prioridad");
-
-                entity.HasOne(d => d.Prefeencia)
-                    .WithMany(p => p.Seleccion)
-                    .HasForeignKey(d => d.Prefeenciaid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_prefeenciaid");
             });
 
             modelBuilder.Entity<Usuario>(entity =>

@@ -8,13 +8,11 @@ namespace gotohnbackend.Models
         public Categoria()
         {
             Actividades = new HashSet<Actividades>();
-            Preferencia = new HashSet<Preferencia>();
         }
 
         public int Categoriaid { get; set; }
         public string Nombre { get; set; }
 
         public virtual ICollection<Actividades> Actividades { get; set; }
-        public virtual ICollection<Preferencia> Preferencia { get; set; }
     }
 }

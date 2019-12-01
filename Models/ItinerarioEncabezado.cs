@@ -11,9 +11,11 @@ namespace gotohnbackend.Models
         }
 
         public int Itinierarioid { get; set; }
-        public int Prefeenciaid { get; set; }
+        public DateTime? Fechainicio { get; set; }
+        public int? Fechafinal { get; set; }
+        public string Nombre { get; set; }
+        public int? Lugarid { get; set; }
 
-        public virtual Preferencia Prefeencia { get; set; }
         public virtual ICollection<ItinerarioDetalle> ItinerarioDetalle { get; set; }
     }
 }
